@@ -163,3 +163,52 @@ button {
   background: #fff;
   /* Yahan koi animation nahi honi chahiye */
 }
+@media (max-width: 600px) {
+  body {
+    padding-top: 30px;
+  }
+
+  .container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  img, .profile-pic {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-pic-border {
+    width: 110px;
+    height: 110px;
+    padding: 3px;
+  }
+
+  .tools-contact-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .it-tools, .contact {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .about-me {
+    padding: 10px;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .social-links a {
+    width: 100%;
+    padding: 10px;
+  }
+}
