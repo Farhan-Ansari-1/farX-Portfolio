@@ -37,6 +37,49 @@ body {
   flex-direction: column;
 }
 
+/* --- Accessibility: Focus Styles --- */
+:focus-visible {
+  outline: 2px solid var(--c-link);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- Global Background Decorative Shapes --- */
+body::before,
+body::after {
+  content: "";
+  position: fixed; /* Use fixed to prevent affecting document flow */
+  border-radius: 50%;
+  opacity: 0.08; /* Kept very subtle */
+  z-index: -1; /* Behind all content */
+  filter: blur(80px); /* Soft, glowing effect */
+  will-change: transform; /* Performance hint for animation */
+}
+
+body::before {
+  width: 500px;
+  height: 500px;
+  background: var(--c-primary); /* Theme's primary color */
+  top: -10%;
+  left: -15%;
+  animation: moveBlob 30s ease-in-out infinite;
+}
+
+body::after {
+  width: 600px;
+  height: 600px;
+  background: var(--c-link); /* Theme's link color */
+  bottom: -20%;
+  right: -20%;
+  animation: moveBlob 35s ease-in-out infinite reverse;
+}
+
+@keyframes moveBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -60px) scale(1.1); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
 /* --- Header & Navbar --- */
 .site-header {
   position: sticky;
@@ -163,22 +206,40 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.4s ease; /* For hover scaling */
 }
 
 .profile-pic {
   width: 280px;
   height: 320px; /* Taller hexagon */
   object-fit: cover;
-  filter: drop-shadow(0px 20px 25px rgba(0, 0, 0, 0.35));
+  /* Using filter for both a standard shadow and a colored glow */
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2))
+    drop-shadow(0 0 15px rgba(142, 68, 173, 0.4));
   position: relative;
   z-index: 1;
-  transition: transform 0.4s ease, clip-path 0.4s ease;
+  transition: transform 0.4s ease;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: pulseGlow 5s ease-in-out infinite; /* Added pulsing glow animation */
 }
 
-.profile-pic:hover {
-  transform: scale(1.05);
-  clip-path: polygon(0% 20%, 60% 0%, 100% 50%, 60% 100%, 0% 80%);
+.intro-image:hover {
+  transform: scale(1.05); /* Scale the whole container on hover */
+}
+
+@keyframes pulseGlow {
+  0% {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2))
+      drop-shadow(0 0 15px rgba(142, 68, 173, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.25))
+      drop-shadow(0 0 25px rgba(142, 68, 173, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2))
+      drop-shadow(0 0 15px rgba(142, 68, 173, 0.4));
+  }
 }
 
 .social-links {
@@ -564,6 +625,33 @@ main {
 
 .site-footer strong {
   color: var(--c-text-light);
+}
+
+/* --- Back to Top Button --- */
+#back-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--c-primary);
+  color: var(--c-text-light);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  z-index: 99;
+  transition: opacity 0.3s, transform 0.3s;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none; /* Not clickable when hidden */
+}
+
+#back-to-top-btn.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; /* Clickable when shown */
 }
 
 /* --- Responsive Design --- */

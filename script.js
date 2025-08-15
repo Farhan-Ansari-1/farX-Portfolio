@@ -1,15 +1,31 @@
 // Initialize AOS (Animate on Scroll)
 AOS.init();
 
+// --- Utility: Throttle Function ---
+// Prevents a function from being called too frequently.
+function throttle(func, limit) {
+  let inThrottle;
+  return function () {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+
 // Sticky Header on Scroll
 const header = document.querySelector(".site-header");
-window.addEventListener("scroll", () => {
+const handleHeaderScroll = () => {
   if (window.scrollY > 50) {
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
   }
-});
+};
+window.addEventListener("scroll", throttle(handleHeaderScroll, 100));
 
 // Typing Animation for Headline
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (i < text.length) {
         headline.textContent += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 160); // Adjust typing speed here (in ms)
+        setTimeout(typeWriter, 150); // Adjust typing speed here (in ms)
        } else {
         // Typing is done, hide the cursor
         headline.classList.add("typing-done");
@@ -72,3 +88,21 @@ hamburger.addEventListener("click", () => {
 });
 
 navLinks.forEach((n) => n.addEventListener("click", closeMenu));
+
+// --- Back to Top Button ---
+const backToTopBtn = document.getElementById("back-to-top-btn");
+
+// Show button on scroll
+const handleBackToTopScroll = () => {
+  if (window.scrollY > 200) {
+    backToTopBtn.classList.add("show");
+  } else {
+    backToTopBtn.classList.remove("show");
+  }
+};
+window.addEventListener("scroll", throttle(handleBackToTopScroll, 150));
+
+// Scroll to top on click
+backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
