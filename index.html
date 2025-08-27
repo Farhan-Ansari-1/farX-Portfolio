@@ -28,6 +28,8 @@
 
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Form Stylesheet -->
   </head>
   <body>
     <header class="site-header">
@@ -37,13 +39,13 @@
           <ul class="nav-menu">
             <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
             <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="#contact" id="contact-nav-link" class="nav-link">Contact</a></li>
           </ul>
-          <div class="hamburger">
+          <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
-          </div>
+          </button>
         </nav>
       </div>
     </header>
@@ -122,9 +124,8 @@
             <div class="timeline-item">
               <div class="timeline-content">
                 <h3>B.Sc in Information Technology</h3>
-                <p class="timeline-meta">
-                  2025 – Present | Babu Raw Chaughule College
-                </p>
+                <p class="timeline-meta">2024 – Present | Babu Raw Chaughule College</p>
+                <p class="timeline-note">Expected Graduation: 2027</p>
               </div>
             </div>
             <div class="timeline-item">
@@ -138,9 +139,7 @@
             <div class="timeline-item">
               <div class="timeline-content">
                 <h3>Higher Secondary (Science)</h3>
-                <p class="timeline-meta">
-                  Completed 2024 | Samadiya High School & Jr. College
-                </p>
+                <p class="timeline-meta">Completed 2024 | Samadiya High School & Jr. College</p>
               </div>
             </div>
           </div>
@@ -251,24 +250,44 @@
         </div>
       </section>
 
-      <!-- Contact Section -->
-      <section id="contact" class="contact" data-aos="fade-up">
-        <h2>Contact</h2>
-        <div class="contact-item">
-          <i class="fas fa-phone"></i>
-          <a href="tel:7709353616">7709353616</a>
-        </div>
-        <div class="contact-item">
-          <i class="fas fa-envelope"></i>
-          <a href="mailto:farx.root.01@gmail.com">farx.root.01@gmail.com</a>
-        </div>
-      </section>
+       <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+      <div class="modal-content">
+        <button class="close-button" title="Close" aria-label="Close">&times;</button>
+        <section id="contact" class="contact">
+          <h2>Talk to Me</h2>
+          <p class="contact-subtitle">
+            Have a question or want to work together? Feel free to reach out!
+          </p>
+          <form id="contact-form" action="https://formspree.io/f/mgvlvvbz" method="POST">
+            <div class="form-group">
+              <label for="form-name" class="sr-only">Your Name</label>
+              <input type="text" id="form-name" name="name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+              <label for="form-email" class="sr-only">Your Email</label>
+              <input type="email" id="form-email" name="email" placeholder="Your Email" required />
+            </div>
+            <div class="form-group">
+              <label for="form-message" class="sr-only">Your Message</label>
+              <textarea id="form-message" name="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message</button>
+          </form>
+          <div id="form-success-message">
+            <h3>Thank you!</h3>
+            <p>I've received your message and will get back to you soon.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+
     </main>
 
     <button id="back-to-top-btn" title="Go to top" aria-label="Go to top"><i class="fas fa-arrow-up"></i></button>
 
     <footer class="site-footer">
-      <p>© 2025 <strong>farX's</strong> | All Rights Reserved</p>
+      <p>© <span id="copyright-year">2024</span> <strong>farX's</strong> | All Rights Reserved</p>
     </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>

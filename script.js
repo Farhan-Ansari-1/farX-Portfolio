@@ -1,108 +1,184 @@
-// Initialize AOS (Animate on Scroll)
-AOS.init();
+document.addEventListener('DOMContentLoaded', () => {
+  // --- Hamburger Menu ---
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('.nav-menu');
 
-// --- Utility: Throttle Function ---
-// Prevents a function from being called too frequently.
-function throttle(func, limit) {
-  let inThrottle;
-  return function () {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+  // Helper function to close the hamburger menu for better code reuse
+  const closeHamburgerMenu = () => {
+    if (hamburger && navMenu && hamburger.classList.contains('active')) {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
     }
   };
-}
 
-// Sticky Header on Scroll
-const header = document.querySelector(".site-header");
-const handleHeaderScroll = () => {
-  if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !isExpanded);
+    });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        // We don't close for the contact link, as it opens a modal
+        if (!link.id.includes('contact')) {
+            closeHamburgerMenu();
+        }
+      });
+    });
   }
-};
-window.addEventListener("scroll", throttle(handleHeaderScroll, 100));
 
-// Typing Animation for Headline
-document.addEventListener("DOMContentLoaded", () => {
-  const headline = document.getElementById("headline");
-  if (headline) {
-    const text = headline.textContent;
-    headline.textContent = "";
-    let i = 0;
+  // --- Tab Functionality ---
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
 
-    function typeWriter() {
-      if (i < text.length) {
-        headline.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 150); // Adjust typing speed here (in ms)
-       } else {
-        // Typing is done, hide the cursor
-        headline.classList.add("typing-done");
+  if (tabBtns.length > 0 && tabPanes.length > 0) {
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Deactivate all buttons and panes
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanes.forEach(p => p.classList.remove('active'));
+
+        // Activate the clicked button and its corresponding pane
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-tab');
+        const activePane = document.getElementById(tabId);
+        if (activePane) {
+          activePane.classList.add('active');
+        }
+      });
+    });
+  }
+
+  // --- *** NEW: Logic for Project Nav Link *** ---
+  const projectsNavLink = document.querySelector('a.nav-link[href="#projects"]');
+  const projectsTabBtn = document.querySelector('.tab-btn[data-tab="projects-tab"]');
+
+  if (projectsNavLink && projectsTabBtn) {
+    projectsNavLink.addEventListener('click', () => {
+      // When the nav link is clicked, also "click" the corresponding tab button
+      projectsTabBtn.click();
+    });
+  }
+
+  // --- Contact Modal ---
+  const modal = document.getElementById('contact-modal');
+  const contactNavLink = document.getElementById('contact-nav-link');
+  const closeBtn = document.querySelector('.close-button');
+
+  if (modal && contactNavLink && closeBtn) {
+    const openModal = (e) => {
+      e.preventDefault(); // Prevent default anchor behavior
+      modal.classList.add('show-modal');
+      document.body.classList.add('modal-open');
+      // Close hamburger if open
+      closeHamburgerMenu();
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('show-modal');
+      document.body.classList.remove('modal-open');
+
+      // Reset form for next time
+      const contactSection = document.querySelector('#contact');
+      if (contactSection && contactSection.classList.contains('form-submitted')) {
+        contactSection.classList.remove('form-submitted');
+        // Also reset the form fields and button state
+        const form = contactSection.querySelector('#contact-form');
+        const button = form.querySelector('.btn-submit');
+        form.reset();
+        button.disabled = false;
+        button.textContent = 'Send Message';
       }
-    }
+    };
 
-    // Start typing after a short delay
-    setTimeout(typeWriter, 500);
+    contactNavLink.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    // Close modal if user clicks outside of the modal content
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Close modal with Escape key
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('show-modal')) {
+            closeModal();
+        }
+    });
   }
-});
 
-// Tabbed Interface for Skills/Projects
-const tabBtns = document.querySelectorAll(".tab-btn");
-const tabPanes = document.querySelectorAll(".tab-pane");
+  // --- AJAX Form Submission ---
+  const contactForm = document.getElementById('contact-form');
+  const successMessage = document.getElementById('form-success-message');
 
-tabBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const tabId = btn.getAttribute("data-tab");
+  if (contactForm && successMessage) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Prevent the default redirect
 
-    // Deactivate all buttons and panes
-    tabBtns.forEach((b) => b.classList.remove("active"));
-    tabPanes.forEach((p) => p.classList.remove("active"));
+      const submitButton = contactForm.querySelector('.btn-submit');
+      const originalButtonText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
 
-    // Activate the clicked button and corresponding pane
-    btn.classList.add("active");
-    const activePane = document.getElementById(tabId);
-    if (activePane) {
-      activePane.classList.add("active");
-    }
+      const formData = new FormData(contactForm);
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          contactForm.parentElement.classList.add('form-submitted');
+        } else {
+          alert('Oops! There was a problem submitting your form. Please try again later.');
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      } catch (error) {
+        console.error('Submission error:', error);
+        alert('Oops! There was a network error. Please check your connection and try again.');
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+    });
+  }
+
+  // --- Back to Top Button ---
+  const backToTopBtn = document.getElementById('back-to-top-btn');
+
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        backToTopBtn.style.display = 'block';
+      } else {
+        backToTopBtn.style.display = 'none';
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // --- Dynamic Copyright Year ---
+  const yearSpan = document.getElementById('copyright-year');
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
+
+  // --- Initialize AOS ---
+  AOS.init({
+    duration: 1000, // values from 0 to 3000, with step 50ms
+    once: true, // whether animation should happen only once - while scrolling down
   });
-});
-
-// Hamburger Menu Logic
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
-const navLinks = document.querySelectorAll(".nav-link");
-
-function closeMenu() {
-  hamburger.classList.remove("active");
-  navMenu.classList.remove("active");
-}
-
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
-  navMenu.classList.toggle("active");
-});
-
-navLinks.forEach((n) => n.addEventListener("click", closeMenu));
-
-// --- Back to Top Button ---
-const backToTopBtn = document.getElementById("back-to-top-btn");
-
-// Show button on scroll
-const handleBackToTopScroll = () => {
-  if (window.scrollY > 200) {
-    backToTopBtn.classList.add("show");
-  } else {
-    backToTopBtn.classList.remove("show");
-  }
-};
-window.addEventListener("scroll", throttle(handleBackToTopScroll, 150));
-
-// Scroll to top on click
-backToTopBtn.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
 });
