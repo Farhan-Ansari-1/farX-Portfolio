@@ -295,7 +295,7 @@ main {
 
 .headline-hello {
   display: block;
-  font-size: 2.5em;
+  font-size: 1.8em;
   font-weight: 600;
   color: var(--c-text-meta);
   margin-bottom: 5px;
@@ -303,7 +303,7 @@ main {
 
 .headline-main {
   display: block;
-  font-size: 2.8em;
+  font-size: 1.5em; /* Adjusted to prevent line breaks */
   color: var(--c-text-dark);
   line-height: 1.1;
 }
@@ -335,8 +335,8 @@ main {
 }
 
 .profile-pic {
-  width: 280px;
-  height: 320px; /* Taller hexagon */
+  width: 380px;
+  height: 360px; /* Taller hexagon */
   object-fit: cover;
   /* Using filter for both a standard shadow and a colored glow */
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2))
@@ -442,15 +442,15 @@ main {
 }
 
 .about-image {
-  width: 70%;
+  width: 100%;
   max-width: 350px;
   border-radius: 15px;
   filter: drop-shadow(0 8px 12px var(--shadow-light));
 }
 
 .journey-wrapper {
-  max-width: 800px; /* Widen for zigzag layout */
-  margin: 80px auto;
+  max-width: 700px;
+  margin: 60px auto;
 }
 
 .about-me h2 {
@@ -478,39 +478,23 @@ main {
 
 .timeline-container {
   position: relative;
-  padding: 10px 0;
 }
 
 .timeline-container::before {
   content: "";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 0;
-  bottom: 0;
-  width: 4px; /* Thicker line */
+  left: 8px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
   background-color: var(--c-border);
   border-radius: 2px;
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 40px;
-  width: 50%;
-}
-
-/* --- Zigzag Layout --- */
-/* Odd items (1, 3, 5...) on the right */
-.timeline-item:nth-child(odd) {
-  left: 50%;
-  padding-left: 30px; /* Space from the center line */
-}
-
-/* Even items (2, 4, 6...) on the left */
-.timeline-item:nth-child(even) {
-  left: 0;
-  padding-right: 30px; /* Space from the center line */
-  text-align: right; /* Align text to the right */
+  margin-bottom: 30px;
+  padding-left: 35px;
 }
 
 .timeline-content {
@@ -518,28 +502,18 @@ main {
   background: var(--c-secondary-bg);
   padding: 20px;
   border-radius: 10px;
-  position: relative;
-}
-
-/* Border for odd (right) items */
-.timeline-item:nth-child(odd) .timeline-content {
   border-left: 3px solid var(--c-primary);
-}
-
-/* Border for even (left) items */
-.timeline-item:nth-child(even) .timeline-content {
-  border-right: 3px solid var(--c-primary);
 }
 
 .timeline-item:last-child {
   margin-bottom: 0;
 }
 
-/* The dot on the timeline */
 .timeline-item::before {
   content: "";
   position: absolute;
-  top: 25px; /* Vertically center with the card */
+  left: -1px;
+  top: 25px;
   transform: translateY(-50%);
   width: 22px;
   height: 22px;
@@ -549,27 +523,10 @@ main {
   z-index: 1;
 }
 
-/* Dot position for odd (right) items */
-.timeline-item:nth-child(odd)::before {
-  left: -11px; /* (width/2) to the left of the item's start */
-}
-
-/* Dot position for even (left) items */
-.timeline-item:nth-child(even)::before {
-  right: -11px; /* (width/2) to the right of the item's end */
-}
-
-/* Hover effects */
-.timeline-item:nth-child(odd):hover .timeline-content {
-  transform: translateX(10px) scale(1.02);
+.timeline-item:hover .timeline-content {
+  transform: translateX(10px);
   box-shadow: 0 8px 20px var(--shadow-light);
 }
-
-.timeline-item:nth-child(even):hover .timeline-content {
-  transform: translateX(-10px) scale(1.02);
-  box-shadow: 0 8px 20px var(--shadow-light);
-}
-
 .timeline-note {
   font-size: 0.9rem;
   color: #aaa;
@@ -936,12 +893,19 @@ main {
     font-size: 2em;
   }
   .headline-main {
-    font-size: 3.2em;
+    font-size: 3.0em;
   }
 }
 
 @media (max-width: 768px) {
   /* For mobile */
+
+  /* Hide decorative blobs on mobile to prevent layout issues */
+  body::before,
+  body::after {
+    display: none;
+  }
+
   .hamburger {
     display: block;
   }
@@ -1010,34 +974,13 @@ main {
   .about-image-container {
     order: -1; /* Show image above text on mobile */
   }
+  .about-me {
+    position: static; /* Reset desktop positioning */
+    top: 0;
+    margin-top: 20px; /* Use margin for spacing on mobile */
+  }
 
-  /* Revert timeline to single column on mobile */
-  .timeline-container::before {
-    left: 8px; /* Back to the left */
-    transform: none;
-  }
-  .timeline-item,
-  .timeline-item:nth-child(even) {
-    width: 100%;
-    left: 0;
-    padding-left: 35px; /* Original padding */
-    padding-right: 0;
-    text-align: left; /* Reset text alignment */
-  }
-  .timeline-item::before,
-  .timeline-item:nth-child(odd)::before,
-  .timeline-item:nth-child(even)::before {
-    left: -1px; /* Original position */
-    right: auto;
-  }
-  .timeline-item:nth-child(even) .timeline-content {
-    border-right: none;
-    border-left: 3px solid var(--c-primary); /* All have border-left */
-  }
-  .timeline-item:hover .timeline-content,
-  .timeline-item:nth-child(even):hover .timeline-content {
-    transform: translateX(5px); /* Simpler hover for mobile */
-  }
+  /* Timeline is already single-column, no major changes needed */
 }
 
 @media (max-width: 480px) {
@@ -1047,7 +990,7 @@ main {
     font-size: 1.8em;
   }
   .headline-main {
-    font-size: 2.8em;
+    font-size: 2.6em;
   }
   .intro-text .subtitle {
     font-size: 1.1em;
