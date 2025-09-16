@@ -121,6 +121,23 @@ h1, h2, h3, h4, h5, h6, .nav-logo {
   font-family: var(--font-heading);
   font-weight: 700; /* Ensure headings are bold */
 }
+
+/* Reusable Section Title */
+.section-title {
+  text-align: center;
+  font-size: 2em;
+  color: var(--c-primary-light);
+  margin-bottom: 40px;
+  position: relative;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-divider);
+  margin: 10px auto 0;
+}
 /* --- Accessibility: Focus Styles --- */
 :focus-visible {
   outline: 2px solid var(--c-link);
@@ -265,32 +282,34 @@ main {
 }
 
 .intro-text h1 {
-  font-size: 3.5em;
-  color: var(--c-primary);
-  line-height: 1.2;
-  margin: 0;
+  /* Base styles for the container */
+  line-height: 1.1;
+  margin: 20px 0; /* Add some vertical margin */
 }
 
-.intro-text h1::after {
-  content: "|";
-  display: inline-block;
-  animation: blink 0.7s infinite;
-  color: var(--c-link);
-  margin-left: 5px;
-}
-
+/* The blinking cursor is no longer needed */
+.intro-text h1::after,
 .intro-text h1.typing-done::after {
   display: none;
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+.headline-hello {
+  display: block;
+  font-size: 2.5em;
+  font-weight: 600;
+  color: var(--c-text-meta);
+  margin-bottom: 5px;
+}
+
+.headline-main {
+  display: block;
+  font-size: 2.8em;
+  color: var(--c-text-dark);
+  line-height: 1.1;
+}
+
+.headline-name {
+  color: var(--c-primary); /* Accent color for the name */
 }
 
 .intro-text .subtitle {
@@ -399,25 +418,42 @@ main {
 /* --- About & Journey Section --- */
 .content-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.8fr 1.1fr; /* Give more space to the text box */
   gap: 30px;
   max-width: 1000px;
   margin: 60px auto;
-  align-items: flex-start;
+  align-items: center; /* Vertically align items to the center */
 }
 
-.about-me,
-.timeline-section {
+.about-me {
   background: var(--c-secondary-bg);
-  border-radius: 15px;
-  padding: 25px;
+  border-radius: 25px;
+  padding: 35px;
   text-align: left;
   box-shadow: 0 4px 20px var(--shadow-light);
-  height: 100%;
+  position: relative; /* Enable positioning */
+  top: 20px; /* Nudge the box down by 20px from its centered position */
 }
 
-.about-me h2,
-.timeline-section h2 {
+.about-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-image {
+  width: 70%;
+  max-width: 350px;
+  border-radius: 15px;
+  filter: drop-shadow(0 8px 12px var(--shadow-light));
+}
+
+.journey-wrapper {
+  max-width: 800px; /* Widen for zigzag layout */
+  margin: 80px auto;
+}
+
+.about-me h2 {
   margin-top: 0;
   margin-bottom: 25px;
   color: var(--c-primary-light);
@@ -442,48 +478,103 @@ main {
 
 .timeline-container {
   position: relative;
-  padding-left: 25px;
+  padding: 10px 0;
 }
 
 .timeline-container::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: 10px;
-  bottom: 10px;
-  width: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 4px; /* Thicker line */
   background-color: var(--c-border);
+  border-radius: 2px;
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
+  width: 50%;
+}
+
+/* --- Zigzag Layout --- */
+/* Odd items (1, 3, 5...) on the right */
+.timeline-item:nth-child(odd) {
+  left: 50%;
+  padding-left: 30px; /* Space from the center line */
+}
+
+/* Even items (2, 4, 6...) on the left */
+.timeline-item:nth-child(even) {
+  left: 0;
+  padding-right: 30px; /* Space from the center line */
+  text-align: right; /* Align text to the right */
 }
 
 .timeline-content {
   transition: all 0.3s ease;
+  background: var(--c-secondary-bg);
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Border for odd (right) items */
+.timeline-item:nth-child(odd) .timeline-content {
+  border-left: 3px solid var(--c-primary);
+}
+
+/* Border for even (left) items */
+.timeline-item:nth-child(even) .timeline-content {
+  border-right: 3px solid var(--c-primary);
 }
 
 .timeline-item:last-child {
   margin-bottom: 0;
 }
 
+/* The dot on the timeline */
 .timeline-item::before {
   content: "";
   position: absolute;
-  left: -34px;
-  top: 5px;
-  width: 18px;
-  height: 18px;
+  top: 25px; /* Vertically center with the card */
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background-color: var(--c-primary);
-  border: 3px solid var(--c-secondary-bg);
+  border: 4px solid var(--gradient-bg);
   z-index: 1;
 }
 
-.timeline-item:hover .timeline-content {
-  transform: translateX(5px);
-  box-shadow: 0 6px 15px var(--shadow-light);
+/* Dot position for odd (right) items */
+.timeline-item:nth-child(odd)::before {
+  left: -11px; /* (width/2) to the left of the item's start */
+}
+
+/* Dot position for even (left) items */
+.timeline-item:nth-child(even)::before {
+  right: -11px; /* (width/2) to the right of the item's end */
+}
+
+/* Hover effects */
+.timeline-item:nth-child(odd):hover .timeline-content {
+  transform: translateX(10px) scale(1.02);
+  box-shadow: 0 8px 20px var(--shadow-light);
+}
+
+.timeline-item:nth-child(even):hover .timeline-content {
+  transform: translateX(-10px) scale(1.02);
+  box-shadow: 0 8px 20px var(--shadow-light);
+}
+
+.timeline-note {
+  font-size: 0.9rem;
+  color: #aaa;
+  font-style: italic;
+  margin-top: 5px;
 }
 
 .timeline-content h3 {
@@ -496,13 +587,6 @@ main {
   font-size: 0.85em;
   font-style: italic;
   color: var(--c-text-meta);
-}
-
-.timeline-note {
-  font-size: 0.9rem;
-  color: #aaa;
-  font-style: italic;
-  margin-top: 5px;
 }
 
 /* --- Skills & Projects Section --- */
@@ -847,8 +931,12 @@ main {
   .intro-wrapper {
     gap: 20px;
   }
-  .intro-text h1 {
-    font-size: 3em;
+  /* Responsive headline for tablets */
+  .headline-hello {
+    font-size: 2em;
+  }
+  .headline-main {
+    font-size: 3.2em;
   }
 }
 
@@ -919,12 +1007,47 @@ main {
   .content-wrapper {
     grid-template-columns: 1fr;
   }
+  .about-image-container {
+    order: -1; /* Show image above text on mobile */
+  }
+
+  /* Revert timeline to single column on mobile */
+  .timeline-container::before {
+    left: 8px; /* Back to the left */
+    transform: none;
+  }
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    width: 100%;
+    left: 0;
+    padding-left: 35px; /* Original padding */
+    padding-right: 0;
+    text-align: left; /* Reset text alignment */
+  }
+  .timeline-item::before,
+  .timeline-item:nth-child(odd)::before,
+  .timeline-item:nth-child(even)::before {
+    left: -1px; /* Original position */
+    right: auto;
+  }
+  .timeline-item:nth-child(even) .timeline-content {
+    border-right: none;
+    border-left: 3px solid var(--c-primary); /* All have border-left */
+  }
+  .timeline-item:hover .timeline-content,
+  .timeline-item:nth-child(even):hover .timeline-content {
+    transform: translateX(5px); /* Simpler hover for mobile */
+  }
 }
 
 @media (max-width: 480px) {
   /* For small mobile phones */
-  .intro-text h1 {
-    font-size: 2.2em;
+  /* Responsive headline for small phones */
+  .headline-hello {
+    font-size: 1.8em;
+  }
+  .headline-main {
+    font-size: 2.8em;
   }
   .intro-text .subtitle {
     font-size: 1.1em;

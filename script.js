@@ -1,25 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Typing Effect ---
-  const headline = document.getElementById('headline');
-  if (headline) {
-    const textToType = headline.textContent; // Get text from HTML
-    headline.textContent = ''; // Clear it for the effect
-
-    let i = 0;
-    function typeWriter() {
-      if (i < textToType.length) {
-        headline.textContent += textToType.charAt(i);
-        i++;
-        setTimeout(typeWriter, 120); // Adjust typing speed here
-      } else {
-        headline.classList.add('typing-done'); // Stop the cursor from blinking via CSS
-      }
-    }
-
-    // Start after a brief delay to make it noticeable
-    setTimeout(typeWriter, 500);
-  }
-
   // --- Scrolled Header Effect ---
   const siteHeader = document.querySelector('.site-header');
   if (siteHeader) {
@@ -212,6 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Initialize AOS ---
   AOS.init({
     duration: 1000, // values from 0 to 3000, with step 50ms
-    once: true, // whether animation should happen only once - while scrolling down
+    once: false, // Animation will happen every time you scroll to the element
   });
 });
