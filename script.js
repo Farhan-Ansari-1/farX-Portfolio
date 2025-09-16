@@ -1,4 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Typing Effect ---
+  const headline = document.getElementById('headline');
+  if (headline) {
+    const textToType = headline.textContent; // Get text from HTML
+    headline.textContent = ''; // Clear it for the effect
+
+    let i = 0;
+    function typeWriter() {
+      if (i < textToType.length) {
+        headline.textContent += textToType.charAt(i);
+        i++;
+        setTimeout(typeWriter, 120); // Adjust typing speed here
+      } else {
+        headline.classList.add('typing-done'); // Stop the cursor from blinking via CSS
+      }
+    }
+
+    // Start after a brief delay to make it noticeable
+    setTimeout(typeWriter, 500);
+  }
+
+  // --- Scrolled Header Effect ---
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    window.addEventListener('scroll', () => {
+      siteHeader.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  }
+
   // --- Hamburger Menu ---
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
@@ -158,11 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (backToTopBtn) {
     window.addEventListener('scroll', () => {
-      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        backToTopBtn.style.display = 'block';
-      } else {
-        backToTopBtn.style.display = 'none';
-      }
+      const shouldShow = document.body.scrollTop > 100 || document.documentElement.scrollTop > 100;
+      backToTopBtn.classList.toggle('show', shouldShow);
     });
 
     backToTopBtn.addEventListener('click', () => {
