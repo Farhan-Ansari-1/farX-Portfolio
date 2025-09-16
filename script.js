@@ -96,9 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Contact Modal ---
   const modal = document.getElementById('contact-modal');
   const contactNavLink = document.getElementById('contact-nav-link');
+  const sayHelloBtn = document.getElementById('say-hello-btn'); // New button
   const closeBtn = document.querySelector('.close-button');
 
-  if (modal && contactNavLink && closeBtn) {
+  if (modal && closeBtn) {
     const openModal = (e) => {
       e.preventDefault(); // Prevent default anchor behavior
       modal.classList.add('show-modal');
@@ -124,7 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    contactNavLink.addEventListener('click', openModal);
+    if (contactNavLink) {
+      contactNavLink.addEventListener('click', openModal);
+    }
+    if (sayHelloBtn) {
+      sayHelloBtn.addEventListener('click', openModal);
+    }
+
     closeBtn.addEventListener('click', closeModal);
 
     // Close modal if user clicks outside of the modal content

@@ -90,8 +90,8 @@ body.modal-open {
   );
   --shadow-light: rgba(0, 0, 0, 0.2);
   --shadow-medium: rgba(0, 0, 0, 0.15);
+  --font-heading: "Playfair Display", serif;
   --font-main: "Poppins", sans-serif;
-  --font-footer: "Segoe UI", sans-serif;
 }
 
 *,
@@ -107,13 +107,19 @@ html {
 
 body {
   background: var(--gradient-bg);
-  font-family: var(--font-main);
+  font-family: var(--font-main); /* Default font for body text */
   text-align: center;
   padding: 0;
   margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Apply the heading font to all headings and the logo */
+h1, h2, h3, h4, h5, h6, .nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700; /* Ensure headings are bold */
 }
 /* --- Accessibility: Focus Styles --- */
 :focus-visible {
@@ -200,7 +206,6 @@ body::after {
 
 .nav-logo {
   font-size: 1.8em;
-  font-weight: 700;
   color: var(--c-primary);
   text-decoration: none;
 }
@@ -262,7 +267,6 @@ main {
 .intro-text h1 {
   font-size: 3.5em;
   color: var(--c-primary);
-  font-weight: 700;
   line-height: 1.2;
   margin: 0;
 }
@@ -293,6 +297,14 @@ main {
   font-size: 1.2em;
   color: var(--c-text-dark);
   margin: 10px 0 30px 0;
+}
+
+.intro-actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
 .intro-image {
@@ -361,6 +373,29 @@ main {
   transform: translateY(-3px);
 }
 
+/* --- Call to Action Button --- */
+.btn-cta {
+  padding: 12px 25px;
+  background-color: var(--c-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50px; /* Pill shape */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-main);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-cta:hover {
+  background-color: var(--c-primary-light);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 /* --- About & Journey Section --- */
 .content-wrapper {
   display: grid;
@@ -387,7 +422,6 @@ main {
   margin-bottom: 25px;
   color: var(--c-primary-light);
   font-size: 1.3em;
-  font-weight: 600;
   letter-spacing: 0.5px;
 }
 
@@ -765,7 +799,6 @@ main {
   padding: 25px 15px;
   color: #95a5a6;
   text-align: center;
-  font-family: var(--font-footer);
   font-size: 14px;
   border-top: 1px solid #333;
   margin-top: 0;
@@ -877,6 +910,11 @@ main {
   }
   .social-links {
     justify-content: center;
+  }
+  .intro-actions {
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
   }
   .content-wrapper {
     grid-template-columns: 1fr;
