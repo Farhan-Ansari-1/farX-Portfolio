@@ -229,8 +229,9 @@ body::after {
 
 .logo-img {
   height: 60px; /* Aap is height ko apne logo ke hisab se adjust kar sakte hain */
-  width: auto; /* Maintains the aspect ratio */
+  width: auto; /* Height ke barabar rakhein taaki perfect circle bane */
   display: block;
+  border-radius: 0%; /* Circle shape */
   object-fit: cover; /* Ensure the image covers the container */
 }
 
