@@ -227,6 +227,13 @@ body::after {
   text-decoration: none;
 }
 
+.logo-img {
+  height: 60px; /* Aap is height ko apne logo ke hisab se adjust kar sakte hain */
+  width: auto; /* Maintains the aspect ratio */
+  display: block;
+  object-fit: cover; /* Ensure the image covers the container */
+}
+
 .nav-menu {
   display: flex;
   gap: 30px;
