@@ -219,4 +219,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start typing after AOS animation (approx 1s)
     setTimeout(typeWriter, 1000);
   }
+
+  // --- Active Link Highlighter (Scroll Spy) ---
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= (sectionTop - 150)) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
+  });
 });

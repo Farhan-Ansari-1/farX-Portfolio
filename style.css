@@ -72,7 +72,7 @@ body.modal-open {
   }
 }
 :root {
-  --c-primary: #126247ff; /* Professional Emerald Green */
+  --c-primary: #124332ff; /* Professional Emerald Green */
   --c-primary-light: #4c6059ff; /* Muted Slate Green */
   --c-primary-bg: #0f172a; /* Deep Slate (Professional Dark) */
   --c-secondary-bg: #1e293b; /* Slate 800 for Cards */
@@ -252,6 +252,12 @@ body::after {
 
 .nav-link:hover {
   color: var(--c-primary);
+}
+
+/* Active Link State (Added by JS) */
+.nav-link.active {
+  color: var(--c-primary);
+  position: relative;
 }
 
 .hamburger {
@@ -535,6 +541,26 @@ main {
   background-color: var(--c-primary-light);
   transform: translateY(-3px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Scroll Down Indicator --- */
+.scroll-indicator-container {
+  text-align: center;
+  margin-top: -40px; /* Pull it up slightly into the intro space */
+  margin-bottom: 40px;
+  animation: bounce 2s infinite;
+  position: relative;
+  z-index: 10;
+}
+
+.scroll-indicator {
+  color: var(--c-text-meta);
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.scroll-indicator:hover {
+  color: var(--c-primary);
 }
 
 /* --- About & Journey Section --- */
@@ -1128,4 +1154,3 @@ main {
   .intro-text .subtitle {
     font-size: 1.1em;
   }
-}
