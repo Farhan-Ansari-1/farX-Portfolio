@@ -193,4 +193,30 @@ document.addEventListener('DOMContentLoaded', () => {
     duration: 1000, // values from 0 to 3000, with step 50ms
     once: true, // whether animation should happen only once - while scrolling down
   });
+
+  // --- Typewriter Effect for Subtitle ---
+  const subtitle = document.getElementById('typing-subtitle');
+  if (subtitle) {
+    const text = subtitle.textContent.trim();
+    subtitle.textContent = '';
+
+    // Create cursor element
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    subtitle.appendChild(cursor);
+
+    let i = 0;
+    const typeWriter = () => {
+      if (i < text.length) {
+        cursor.before(text.charAt(i));
+        i++;
+        setTimeout(typeWriter, 70); // Typing speed
+      } else {
+        cursor.style.display = 'none';
+      }
+    };
+    
+    // Start typing after AOS animation (approx 1s)
+    setTimeout(typeWriter, 1000);
+  }
 });
