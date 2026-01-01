@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       hamburger.classList.toggle('active');
       navMenu.classList.toggle('active');
       const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-      hamburger.setAttribute('aria-expanded', !isExpanded);
+      hamburger.setAttribute('aria-expanded', (!isExpanded).toString());
     });
 
     // Close menu when a link is clicked
@@ -221,7 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Active Link Highlighter (Scroll Spy) ---
-  const sections = document.querySelectorAll('section');
+  // Select only direct sections of main to avoid selecting the hidden contact section in modal
+  const sections = document.querySelectorAll('main > section');
   const navLinks = document.querySelectorAll('.nav-link');
 
   window.addEventListener('scroll', () => {
@@ -230,13 +231,16 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
       if (window.scrollY >= (sectionTop - 150)) {
-        current = section.getAttribute('id');
+        // Only update current if the section has an ID
+        const id = section.getAttribute('id');
+        if (id) current = id;
       }
     });
 
     navLinks.forEach(link => {
       link.classList.remove('active');
-      if (link.getAttribute('href').includes(current)) {
+      // Check if current is not empty before matching
+      if (current && link.getAttribute('href').includes(current)) {
         link.classList.add('active');
       }
     });

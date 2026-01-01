@@ -114,6 +114,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scroll from animations */
 }
 
 /* Apply the heading font to all headings and the logo */
@@ -939,6 +940,7 @@ main {
   color: var(--c-text-dark);
   font-family: var(--font-main);
   font-size: 1rem;
+  resize: vertical; /* Allow only vertical resizing */
 }
 
 .form-group input::placeholder,
