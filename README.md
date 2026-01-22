@@ -27,7 +27,7 @@ This is my personal portfolio website, designed to showcase my skills, projects,
 
 ## 🌐 Live Demo
 
-You can view the live version of the portfolio here: **https://farhan-ansari-1.github.io/farX-portfolio/**
+You can view the live version of the portfolio here: **https://farhan-ansari-1.github.io/farX-Portfolio/**
 
 ## ✍️ Author
 
