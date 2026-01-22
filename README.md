@@ -4,8 +4,9 @@ This is my personal portfolio website, designed to showcase my skills, projects,
 
 ## ✨ Features
 
+-   **Cyberpunk / Neon Theme:** A modern, futuristic dark theme with glassmorphism effects.
 -   **Responsive Design:** Looks great on desktops, tablets, and mobile phones.
--   **Interactive UI:** Smooth animations, tabbed sections, and a contact modal.
+-   **Interactive UI:** 3D tilt cards, particle network background, and smooth animations.
 -   **Modern Tech:** Built with HTML5, CSS3 (with custom properties), and modern JavaScript.
 -   **Performance:** Uses lazy loading for images and is optimized for a fast user experience.
 
@@ -18,6 +19,11 @@ This is my personal portfolio website, designed to showcase my skills, projects,
     -   Google Fonts for typography.
 -   **Backend (Contact Form):** Formspree
 -   **Hosting:** GitHub Pages
+
+## 📂 Featured Projects
+
+-   **R0uteR:** An advanced AI Assistant with a futuristic HUD and automation capabilities.
+-   **fXtooR:** An AI & Cybersecurity Tools directory built with React.
 
 ## 🌐 Live Demo
 

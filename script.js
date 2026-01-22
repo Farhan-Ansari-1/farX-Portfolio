@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = '#00f2ea'; // Neon Cyan
+        ctx.fillStyle = 'rgba(0, 242, 234, 0.3)'; // Feeka (Dim) Neon Cyan
         ctx.fill();
       }
     }
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           if (distance < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 242, 234, ${1 - distance/100})`;
+            ctx.strokeStyle = `rgba(0, 242, 234, ${(1 - distance/100) * 0.15})`; // Lines ko bohot halka kar diya
             ctx.lineWidth = 1;
             ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
             ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
