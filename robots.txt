@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://farhan-ansari-1.github.io/farX-Portfolio/sitemap.xml
