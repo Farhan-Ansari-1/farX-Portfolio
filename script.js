@@ -245,4 +245,128 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // --- 3D Tilt Effect for Cards ---
+  const tiltCards = document.querySelectorAll('.project-card, .about-me, .skill-item');
+
+  tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -5; // Max rotation deg
+      const rotateY = ((x - centerX) / centerX) * 5;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+
+  // --- Custom Cursor Logic ---
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorOutline = document.querySelector('.cursor-outline');
+
+  if (cursorDot && cursorOutline) {
+    window.addEventListener('mousemove', (e) => {
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      // Dot follows instantly
+      cursorDot.style.left = `${posX}px`;
+      cursorDot.style.top = `${posY}px`;
+
+      // Outline follows with slight delay (via CSS transition)
+      cursorOutline.style.left = `${posX}px`;
+      cursorOutline.style.top = `${posY}px`;
+    });
+
+    // Add hover effect for links and buttons
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-item');
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', () => cursorOutline.classList.add('hovered'));
+      el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hovered'));
+    });
+  }
+
+  // --- Cyber Network Background (Canvas) ---
+  const canvas = document.getElementById('cyber-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let particlesArray;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.directionX = (Math.random() * 1) - 0.5; // Speed
+        this.directionY = (Math.random() * 1) - 0.5;
+        this.size = Math.random() * 2 + 1;
+      }
+      update() {
+        if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+        if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+        this.x += this.directionX;
+        this.y += this.directionY;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = '#00f2ea'; // Neon Cyan
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      particlesArray = [];
+      const numberOfParticles = (canvas.width * canvas.height) / 9000; // Density
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        
+        // Draw connections
+        for (let j = i; j < particlesArray.length; j++) {
+          const dx = particlesArray[i].x - particlesArray[j].x;
+          const dy = particlesArray[i].y - particlesArray[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(0, 242, 234, ${1 - distance/100})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    init();
+    animate();
+  }
 });

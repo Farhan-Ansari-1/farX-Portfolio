@@ -31,6 +31,11 @@
 
   </head>
   <body>
+    <!-- Cyber Background & Cursor -->
+    <canvas id="cyber-canvas"></canvas>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <header class="site-header">
       <div class="container nav-container">
         <a href="#home" class="nav-logo">
@@ -62,46 +67,46 @@
           <p class="subtitle" id="typing-subtitle">
             Cybersecurity Enthusiast & B.Sc IT Student
           </p>
-          <div class="intro-actions">
-            <div class="social-links">
-              <a
-                href="https://www.linkedin.com/in/farhan-ansari-"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-icon"
-                aria-label="LinkedIn"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-              <a
-                href="https://github.com/farhan-ansari-1"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-icon"
-                aria-label="GitHub"
-                ><i class="fab fa-github"></i
-              ></a>
-              <a
-                href="https://x.com/0_farX_antiX?t=kOm_0716T19m28pydN34FA&s=09"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-icon"
-                aria-label="X"
-                ><i class="fab fa-x-twitter"></i
-              ></a>
-              <a
-                href="https://www.instagram.com/0_farx_antix?igsh=ZWVraTFsOG5mNXJj"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-icon"
-                aria-label="Instagram"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="farhan_resume.pdf" download class="social-icon" aria-label="Resume"
-                ><i class="fas fa-file-lines"></i
-              ></a>
-            </div>
-            <button id="say-hello-btn" class="btn-cta"><i class="fas fa-paper-plane"></i> Say Hello</button>
+        </div>
+        <div class="intro-actions" data-aos="fade-up">
+          <div class="social-links">
+            <a
+              href="https://www.linkedin.com/in/farhan-ansari-"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon"
+              aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+            <a
+              href="https://github.com/farhan-ansari-1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon"
+              aria-label="GitHub"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="https://x.com/0_farX_antiX?t=kOm_0716T19m28pydN34FA&s=09"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon"
+              aria-label="X"
+              ><i class="fab fa-x-twitter"></i
+            ></a>
+            <a
+              href="https://www.instagram.com/0_farx_antix?igsh=ZWVraTFsOG5mNXJj"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon"
+              aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="farhan_resume.pdf" download class="social-icon" aria-label="Resume"
+              ><i class="fas fa-file-lines"></i
+            ></a>
           </div>
+          <button id="say-hello-btn" class="btn-cta">Say Hello</button>
         </div>
         <div class="intro-image" data-aos="fade-left">
           <img class="profile-pic" src="profile.png" alt="Farhan's Photo" />
@@ -221,9 +226,9 @@
                   <i class="fab fa-css3-alt"></i>
                   <span>CSS</span>
                 </div>
-                <div class="skill-item" title="C#">
+                <div class="skill-item" title="python">
                   <i class="fas fa-code"></i>
-                  <span>C#</span>
+                  <span>python</span>
                 </div>
                 <div class="skill-item" title="GitHub">
                   <i class="fab fa-github"></i>
@@ -263,7 +268,19 @@
           </div>
           <div id="projects-tab" class="tab-pane">
             <div class="project-grid">
-              <div class="project-card">
+              <div class="project-card project-router">
+                <h3>R0uteR (AI Assistant)</h3>
+                <p>
+                  An advanced desktop AI with a futuristic HUD, Face Lock, and Screen Reading capabilities. 
+                  Powered by Gemini 2.5 Flash, it features a "Hacker" persona, voice activation ("Hey Router"), 
+                  and system automation (WhatsApp, App Launcher).
+                </p>
+                <div class="project-links">
+                  <a href="#" target="_blank" rel="noopener noreferrer">Watch Demo</a>
+                  <a href="https://github.com/Farhan-Ansari-1/R0uteR" target="_blank" rel="noopener noreferrer">Source Code</a>
+                </div>
+              </div>
+              <div class="project-card project-portfolio">
                 <h3>Personal Portfolio Website</h3>
                 <p>
                   Developed a personal portfolio website using HTML & CSS.
@@ -280,7 +297,7 @@
                   >
                 </div>
               </div>
-              <div class="project-card">
+              <div class="project-card project-fxtoor">
                 <h3>AI & Cybersecurity Tools Directory</h3>
                 <p>
                   Created an AI & Cybersecurity Tools directory using React and
