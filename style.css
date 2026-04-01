@@ -706,6 +706,16 @@ main {
 }
 
 /* --- Project Card Background Images --- */
+.project-logvigil {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.95)), url('L0gVigil.svg');
+  background-size: cover;
+  background-position: center;
+}
+
+.project-logvigil:hover {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.85)), url('L0gVigil.svg');
+}
+
 .project-router {
   /* Fixed filename case & added light overlay */
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.95)), url('R0uteR.png');

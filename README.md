@@ -23,6 +23,7 @@ This is my personal portfolio website, designed to showcase my skills, projects,
 ## 📂 Featured Projects
 
 -   **R0uteR:** An advanced AI Assistant with a futuristic HUD and automation capabilities.
+-   **L0gVigil:** Real-time Intrusion Prevention System (IPS) for SSH brute-force protection.
 -   **fXtooR:** An AI & Cybersecurity Tools directory built with React.
 
 ## 🌐 Live Demo
