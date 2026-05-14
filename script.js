@@ -47,11 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
     tabBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         // Deactivate all buttons and panes
-        tabBtns.forEach(b => b.classList.remove('active'));
+        tabBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
         tabPanes.forEach(p => p.classList.remove('active'));
 
         // Activate the clicked button and its corresponding pane
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
         const tabId = btn.getAttribute('data-tab');
         const activePane = document.getElementById(tabId);
         if (activePane) {
@@ -63,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- *** NEW: Logic for Project Nav Link *** ---
   const projectsNavLink = document.querySelector('a.nav-link[href="#projects"]');
-  const projectsTabBtn = document.querySelector('.tab-btn[data-tab="projects-tab"]');
+  const projectsTabBtn = document.querySelector('.tab-btn[data-tab="projects-tab-panel"]');
 
   if (projectsNavLink && projectsTabBtn) {
     projectsNavLink.addEventListener('click', () => {
@@ -273,7 +277,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursorDot = document.querySelector('.cursor-dot');
   const cursorOutline = document.querySelector('.cursor-outline');
 
-  if (cursorDot && cursorOutline) {
+  // Check if device is touch-capable
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (cursorDot && cursorOutline && !isTouchDevice) {
     window.addEventListener('mousemove', (e) => {
       const posX = e.clientX;
       const posY = e.clientY;
@@ -315,20 +322,23 @@ document.addEventListener('DOMContentLoaded', () => {
       update() {
         if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
         if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-        this.x += this.directionX;
+        this.x += this.directionX; // Increased speed for more dynamic movement
         this.y += this.directionY;
       }
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 242, 234, 0.3)'; // Feeka (Dim) Neon Cyan
+        ctx.fillStyle = 'rgba(0, 255, 140, 0.3)'; // Neon Green Particles (from --c-primary)
         ctx.fill();
       }
     }
 
     function init() {
       particlesArray = [];
-      const numberOfParticles = (canvas.width * canvas.height) / 9000; // Density
+      // Optimize: Limit max particles to prevent crash on high-res screens
+      let numberOfParticles = (canvas.width * canvas.height) / 15000;
+      if (numberOfParticles > 120) numberOfParticles = 120; 
+      
       for (let i = 0; i < numberOfParticles; i++) {
         particlesArray.push(new Particle());
       }
@@ -350,8 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
           
           if (distance < 100) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 242, 234, ${(1 - distance/100) * 0.15})`; // Lines ko bohot halka kar diya
-            ctx.lineWidth = 1;
             ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
             ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
             ctx.stroke();
@@ -369,4 +377,26 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
     animate();
   }
+
+  // --- Terminal Window Controls ---
+  document.querySelectorAll('.terminal-window').forEach(term => {
+    const red = term.querySelector('.terminal-btn.red');
+    const yellow = term.querySelector('.terminal-btn.yellow');
+
+    if (red) {
+      red.addEventListener('click', () => {
+        term.style.transition = 'all 0.3s ease';
+        term.style.opacity = '0';
+        term.style.transform = 'translateY(20px) scale(0.95)';
+        setTimeout(() => term.style.display = 'none', 300);
+      });
+    }
+
+    if (yellow) {
+      yellow.addEventListener('click', () => {
+        const body = term.querySelector('.terminal-body');
+        if (body) body.classList.toggle('minimized-body');
+      });
+    }
+  });
 });

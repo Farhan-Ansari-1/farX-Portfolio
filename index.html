@@ -6,6 +6,9 @@
 
     <title>Farhan Ansari | Cyber Security & IT Portfolio</title>
     <meta name="description" content="Portfolio of Farhan Ansari, a Cyber Security Enthusiast and B.Sc IT Student. Explore projects, skills, and journey in Ethical Hacking and Web Development." />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="msapplication-TileColor" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
 
     <meta name="google-site-verification" content="shjh4HVvpmSSUydaqIefF0MmMObd4fNB7o5EsMFdB14" />
 
@@ -52,11 +55,6 @@
 
   </head>
   <body>
-    <!-- Cyber Background & Cursor -->
-    <canvas id="cyber-canvas"></canvas>
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
     <header class="site-header">
       <div class="container nav-container">
         <a href="#home" class="nav-logo">
@@ -142,26 +140,28 @@
       <!-- About Section -->
       <section id="about" class="content-wrapper" data-aos="fade-up">
         <div class="about-image-container" data-aos="fade-right">
-          <img src="About.png" alt="A person working on a laptop with code and security icons" class="about-image" loading="lazy">
+          <img src="about.png" alt="Farhan's Portrait" class="about-image" loading="lazy">
         </div>
-        <div class="about-me" data-aos="fade-left">
-          <h2>About Me</h2>
-          <p>
-            I am passionate about building a career in Cybersecurity and currently enrolled in a B.Sc. IT program to build a strong technical foundation.
-          </p>
-          <p>
-            <strong>🚀 What I Have Developed:</strong><br>
-            <a href="https://farhan-ansari-1.github.io/fxtoor/" target="_blank" rel="noopener noreferrer">fXtooR</a>: Created and deployed a comprehensive directory for AI & Cybersecurity tools using AI-Assisted Development (React + Vite).<br>
-            • Automation: Built custom AI Agents to automate content creation and implemented CI/CD workflows using GitHub Actions.
-          </p>
-          <p>
-            <strong>🛡️ Security Research & Learning:</strong><br>
-            • Actively learning Ethical Hacking and Social Engineering (focusing on Phishing simulations).<br>
-            • Solving challenges on TryHackMe to understand Network Security & Web Vulnerabilities.
-          </p>
-          <p>
-            I’m eager to find mentorship, training, or entry-level opportunities to grow in cyber security. <strong>Let’s connect if you can guide me!</strong>
-          </p>
+        <!-- Terminal 2: Detailed Info -->
+        <div class="about-me terminal-window" data-aos="fade-up">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="terminal-btn red"></span>
+              <span class="terminal-btn yellow"></span>
+              <span class="terminal-btn green"></span>
+            </div>
+            <div class="terminal-title">farhan@kali: ~/about_info</div>
+          </div>
+          <div class="terminal-body">
+            <p><span class="terminal-prompt">$</span> cat farhan_bio.txt</p>
+            <p class="terminal-warning">PERMISSION_GRANTED: Accessing bio data...</p>
+            <p>I am passionate about building a career in Cybersecurity and currently enrolled in a B.Sc. IT program to build a strong technical foundation.</p>
+            <p><span class="terminal-prompt">></span> <strong>🛡️ Expertise:</strong> Web Development, UI/UX Design, Creative Projects</p>
+            <p><span class="terminal-prompt">></span> <strong>🛡️ Research:</strong> Actively learning Ethical Hacking, Social Engineering, and solving TryHackMe challenges.</p>
+            <br>
+            <p>I’m eager to find mentorship or entry-level opportunities. <strong>Let’s connect!</strong></p>
+            <p><span class="terminal-prompt">$</span> <span class="cursor-block">_</span></p>
+          </div>
         </div>
       </section>
 
@@ -198,16 +198,16 @@
 
       <!-- Skills & Projects Section -->
       <section id="projects" class="interactive-section" data-aos="fade-up">
-        <div class="tab-nav">
-          <button class="tab-btn active" data-tab="skills-tab">
+        <div class="tab-nav" role="tablist">
+          <button class="tab-btn active" data-tab="skills-tab-panel" role="tab" aria-selected="true" aria-controls="skills-tab-panel">
             <i class="fas fa-cogs"></i> Skills
           </button>
-          <button class="tab-btn" data-tab="projects-tab">
+          <button class="tab-btn" data-tab="projects-tab-panel" role="tab" aria-selected="false" aria-controls="projects-tab-panel">
             <i class="fas fa-project-diagram"></i> Projects
           </button>
         </div>
         <div class="tab-content-area">
-          <div id="skills-tab" class="tab-pane active">
+          <div id="skills-tab-panel" class="tab-pane active" role="tabpanel">
             <div class="skills-category">
               <h3>Technical Skills</h3>
               <div class="skill-grid">
@@ -287,9 +287,19 @@
               </div>
             </div>
           </div>
-          <div id="projects-tab" class="tab-pane">
+          <div id="projects-tab-panel" class="tab-pane" role="tabpanel">
             <div class="project-grid">
-              <div class="project-card project-logvigil">
+              <!-- Project 1: L0gVigil -->
+              <div class="project-card terminal-window project-logvigil">
+                <div class="terminal-header">
+                  <div class="terminal-buttons">
+                    <span class="terminal-btn red"></span>
+                    <span class="terminal-btn yellow"></span>
+                    <span class="terminal-btn green"></span>
+                  </div>
+                  <div class="terminal-title">MODULE: L0GVIGIL.SYS | STATUS: <span class="terminal-warning">ACTIVE</span></div>
+                </div>
+                <div class="terminal-body">
                 <h3>L0gVigil (IPS & SSH Shield)</h3>
                 <p>
                   A high-performance Python-based Intrusion Prevention System that detects and blocks SSH brute-force attacks in real-time. 
@@ -299,9 +309,20 @@
                   <a href="https://github.com/Farhan-Ansari-1/L0gVigil" target="_blank" rel="noopener noreferrer">Source Code</a>
                   <a href="architecture.svg" target="_blank" rel="noopener noreferrer">System Architecture</a>
                 </div>
+                </div>
               </div>
 
-              <div class="project-card project-router">
+              <!-- Project 2: R0uteR -->
+              <div class="project-card terminal-window project-router">
+                <div class="terminal-header">
+                  <div class="terminal-buttons">
+                    <span class="terminal-btn red"></span>
+                    <span class="terminal-btn yellow"></span>
+                    <span class="terminal-btn green"></span>
+                  </div>
+                  <div class="terminal-title">MODULE: ROUTER_AI.SH | STATUS: <span class="terminal-warning">ONLINE</span></div>
+                </div>
+                <div class="terminal-body">
                 <h3>R0uteR (AI Assistant)</h3>
                 <p>
                   An advanced desktop AI with a futuristic HUD, Face Lock, and Screen Reading capabilities. 
@@ -312,8 +333,20 @@
                   <a href="#" target="_blank" rel="noopener noreferrer">Watch Demo</a>
                   <a href="https://github.com/Farhan-Ansari-1/R0uteR" target="_blank" rel="noopener noreferrer">Source Code</a>
                 </div>
+                </div>
               </div>
-              <div class="project-card project-portfolio">
+
+              <!-- Project 3: Portfolio -->
+              <div class="project-card terminal-window project-portfolio">
+                <div class="terminal-header">
+                  <div class="terminal-buttons">
+                    <span class="terminal-btn red"></span>
+                    <span class="terminal-btn yellow"></span>
+                    <span class="terminal-btn green"></span>
+                  </div>
+                  <div class="terminal-title">MODULE: PORTFOLIO.WEB | STATUS: <span class="terminal-warning">STABLE</span></div>
+                </div>
+                <div class="terminal-body">
                 <h3>Personal Portfolio Website</h3>
                 <p>
                   Developed a personal portfolio website using HTML & CSS.
@@ -330,7 +363,19 @@
                   >
                 </div>
               </div>
-              <div class="project-card project-fxtoor">
+              </div>
+
+              <!-- Project 4: fXtooR -->
+              <div class="project-card terminal-window project-fxtoor">
+                <div class="terminal-header">
+                  <div class="terminal-buttons">
+                    <span class="terminal-btn red"></span>
+                    <span class="terminal-btn yellow"></span>
+                    <span class="terminal-btn green"></span>
+                  </div>
+                  <div class="terminal-title">MODULE: FXTOOR.DIR | STATUS: <span class="terminal-warning">ACTIVE</span></div>
+                </div>
+                <div class="terminal-body">
                 <h3>AI & Cybersecurity Tools Directory</h3>
                 <p>
                   Created an AI & Cybersecurity Tools directory using React and
@@ -342,6 +387,7 @@
                   <a href="https://farhan-ansari-1.github.io/fxtoor/" target="_blank" rel="noopener noreferrer">Live Demo</a>
                   <a href="https://github.com/farhan-ansari-1/fxtoor" target="_blank" rel="noopener noreferrer">Source Code</a>
                 </div>
+                </div>
               </div>
             </div>
           </div>
@@ -351,30 +397,42 @@
        <!-- Contact Modal -->
     <div id="contact-modal" class="modal">
       <div class="modal-content">
+        <div class="terminal-header">
+          <div class="terminal-buttons">
+            <span class="terminal-btn red"></span>
+            <span class="terminal-btn yellow"></span>
+            <span class="terminal-btn green"></span>
+          </div>
+          <div class="terminal-title">farhan@kali: ~/contact</div>
+        </div>
         <button class="close-button" title="Close" aria-label="Close">&times;</button>
-        <section id="contact" class="contact">
-          <h2>Talk to Me</h2>
-          <p class="contact-subtitle">
-            Have a question or want to work together? Feel free to reach out!
-          </p>
-          <form id="contact-form" action="https://formspree.io/f/mgvlvvbz" method="POST">
-            <div class="form-group">
-              <label for="form-name" class="sr-only">Your Name</label>
-              <input type="text" id="form-name" name="name" placeholder="Your Name" required />
+        <div class="terminal-body" id="contact-terminal-body">
+          <section id="contact" class="contact">
+            <p><span class="terminal-prompt">$</span> echo "Let's connect!"</p>
+            <p>Have a question or want to work together? Feel free to reach out!</p>
+            <br>
+            <form id="contact-form" action="https://formspree.io/f/mgvlvvbz" method="POST">
+              <div class="form-group">
+                <label for="form-name" class="sr-only">Your Name</label>
+                <span class="terminal-prompt">></span> <input type="text" id="form-name" name="name" placeholder="Your Name" required />
+              </div>
+              <div class="form-group">
+                <label for="form-email" class="sr-only">Your Email</label>
+                <span class="terminal-prompt">></span> <input type="email" id="form-email" name="email" placeholder="Your Email" required />
+              </div>
+              <div class="form-group">
+                <label for="form-message" class="sr-only">Your Message</label>
+                <span class="terminal-prompt">></span> <textarea id="form-message" name="message" rows="5" placeholder="Your Message" required></textarea>
+              </div>
+              <br>
+              <p><span class="terminal-prompt">$</span> send_message</p>
+              <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+            <div id="form-success-message">
+              <p><span class="terminal-prompt">$</span> cat success_message.txt</p>
+              <p>Thank you! I've received your message and will get back to you soon.</p>
+              <p><span class="terminal-prompt">$</span> <span class="cursor-block">_</span></p>
             </div>
-            <div class="form-group">
-              <label for="form-email" class="sr-only">Your Email</label>
-              <input type="email" id="form-email" name="email" placeholder="Your Email" required />
-            </div>
-            <div class="form-group">
-              <label for="form-message" class="sr-only">Your Message</label>
-              <textarea id="form-message" name="message" rows="5" placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit" class="btn-submit">Send Message</button>
-          </form>
-          <div id="form-success-message">
-            <h3>Thank you!</h3>
-            <p>I've received your message and will get back to you soon.</p>
           </div>
         </section>
       </div>

@@ -1,12 +1,12 @@
 <svg width="600" height="1000" viewBox="0 0 600 1000" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      .box { fill: #0a0a0a; stroke: #00f2ea; stroke-width: 2; filter: url(#glow); }
+      .box { fill: #0a0a0a; stroke: #a855f7; stroke-width: 2; filter: url(#glow); }
       .text { fill: #ffffff; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; text-anchor: middle; }
       .sub-text { fill: #94a3b8; font-size: 12px; font-family: 'Poppins', sans-serif; text-anchor: middle; }
-      .arrow { stroke: #ff0050; stroke-width: 2; fill: #ff0050; }
-      .arrow-reverse { stroke: #00f2ea; stroke-width: 2; fill: #00f2ea; stroke-dasharray: 4; }
-      .title { fill: #00f2ea; font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 700; text-anchor: middle; }
+      .arrow { stroke: #3b82f6; stroke-width: 2; fill: #3b82f6; }
+      .arrow-reverse { stroke: #a855f7; stroke-width: 2; fill: #a855f7; stroke-dasharray: 4; }
+      .title { fill: #a855f7; font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 700; text-anchor: middle; }
     </style>
     <filter id="glow">
       <feGaussianBlur stdDeviation="3" result="coloredBlur"/>

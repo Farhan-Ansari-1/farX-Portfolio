@@ -1,20 +1,21 @@
 :root {
   /* --- Cyberpunk / Modern Dark Theme --- */
-  --c-bg: #050505;
-  --c-bg-alt: #0a0a0a;
-  --c-primary: #00f2ea; /* Neon Cyan */
-  --c-secondary: #ff0050; /* Neon Red/Pink */
+  --c-bg: #0a0a0a;
+  --c-bg-alt: #050505;
+  --c-primary: #00FF8C; /* Neon Green */
+  --c-secondary: #00D9FF; /* Neon Blue */
+  --c-tertiary: #EAFF00;  /* Neon Yellow - New Accents */
   --c-text-main: #ffffff;
   --c-text-muted: #94a3b8;
   --c-card-bg: rgba(255, 255, 255, 0.03);
   --c-card-border: rgba(255, 255, 255, 0.08);
-  --c-glass: rgba(0, 0, 0, 0.7);
+  --c-glass: rgba(5, 5, 5, 0.8);
   
   --font-heading: "Outfit", sans-serif;
   --font-main: "Poppins", sans-serif;
   
-  --shadow-glow: 0 0 20px rgba(0, 242, 234, 0.3);
-  --gradient-text: linear-gradient(135deg, var(--c-primary), var(--c-secondary));
+  --shadow-glow: 0 0 30px rgba(0, 255, 140, 0.15);
+  --gradient-text: linear-gradient(135deg, var(--c-primary), var(--c-secondary), var(--c-tertiary));
 }
 
 *,
@@ -33,10 +34,10 @@ html {
 body {
   background-color: var(--c-bg);
   font-family: var(--font-main);
-  color: var(--c-text-main);
+  color: #e2e8f0; /* Slightly off-white for better readability */
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: none; /* Hide default cursor */
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6, .nav-logo {
@@ -54,7 +55,7 @@ h1, h2, h3, h4, h5, h6, .nav-logo {
   text-transform: uppercase;
   letter-spacing: 2px;
   background: var(--gradient-text);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   width: 100%;
@@ -76,9 +77,10 @@ h1, h2, h3, h4, h5, h6, .nav-logo {
 }
 
 .btn-cta:hover, .btn-submit:hover {
-  background: var(--c-primary);
-  color: #000;
-  box-shadow: 0 0 25px rgba(0, 242, 234, 0.6);
+  background: var(--c-tertiary);
+  color: #000; /* Contrast on yellow */
+  border-color: var(--c-tertiary);
+  box-shadow: 0 0 25px rgba(234, 255, 0, 0.5);
   transform: translateY(-3px);
 }
 
@@ -378,33 +380,34 @@ main {
 
 /* --- About & Journey Section --- */
 .content-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
   max-width: 1100px;
   margin: 60px auto;
-  align-items: center;
+  align-items: stretch;
   padding: 0 25px;
 }
 
 @media (min-width: 768px) {
-  .content-wrapper { grid-template-columns: 0.8fr 1.1fr; }
+  .content-wrapper { flex-direction: row; align-items: flex-start; justify-content: center; }
 }
 
 .about-me {
-  background: var(--c-card-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--c-card-border);
-  border-radius: 20px;
-  padding: 35px;
+  background: var(--c-bg); /* Solid deep black background */
+  border: 1px solid var(--c-primary); /* Neon green border */
+  border-radius: 30px;
+  box-shadow: 0 0 25px rgba(0, 255, 140, 0.2); /* Subtle glow */
+  padding: 15px;
   text-align: left;
   position: relative;
   transition: transform 0.3s ease;
+  max-width: 700px; /* Space for image on side */
+  width: 100%;
 }
 
 .about-me:hover {
-  border-color: var(--c-primary);
-  box-shadow: var(--shadow-glow);
+  box-shadow: 0 0 35px rgba(0, 255, 140, 0.4); /* Enhanced glow on hover */
 }
 
 .about-image-container {
@@ -425,7 +428,101 @@ main {
   filter: grayscale(0%);
 }
 
-.journey-wrapper {
+/* --- Terminal UI Components --- */
+.terminal-header {
+  background: #1a1a1a; /* Slightly lighter black for the header */
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 20px; /* Match container border radius */
+  border-top-right-radius: 20px;
+  border-bottom: 1px solid rgba(0, 255, 140, 0.3); /* Neon green separator */
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.terminal-btn:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+.terminal-btn.red { background: #ff5f56; }
+.terminal-btn.red:hover { box-shadow: 0 0 10px #ff5f56; }
+.terminal-btn.yellow { background: #ffbd2e; }
+.terminal-btn.yellow:hover { box-shadow: 0 0 10px #ffbd2e; }
+.terminal-btn.green { background: #27c93f; }
+.terminal-btn.green:hover { box-shadow: 0 0 10px #27c93f; }
+
+.terminal-body.minimized-body {
+  display: none;
+}
+
+.terminal-title {
+  margin-left: 20px;
+  font-family: 'Courier New', Courier, monospace; /* Classic terminal font */
+  font-size: 0.85rem;
+  color: #888; /* Muted grey for title */
+}
+
+.terminal-body {
+  padding: 25px;
+  font-family: 'Courier New', Courier, monospace; /* Classic terminal font */
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--c-text-main); /* Main text color */
+  text-shadow: 0 0 8px rgba(0, 255, 140, 0.1); /* Subtle neon glow for text */
+}
+
+.terminal-prompt {
+  color: var(--c-secondary); /* Neon blue for the prompt */
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.terminal-warning {
+  color: var(--c-tertiary); /* Yellow for system alerts */
+}
+
+.terminal-window:hover .terminal-warning {
+  animation: status-blink 1.5s step-start infinite;
+}
+
+@keyframes status-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-arrow {
+  color: var(--c-primary);
+  margin-right: 10px;
+}
+
+.indent-text {
+  padding-left: 20px;
+}
+
+.cursor-block {
+  display: inline-block;
+  width: 10px;
+  height: 18px;
+  background-color: var(--c-primary);
+  animation: blink-caret 0.8s step-end infinite;
+  vertical-align: middle;
+}
+
+
+ .journey-wrapper {
   max-width: 700px;
   margin: 60px auto;
   padding: 0 25px;
@@ -442,6 +539,7 @@ main {
   margin-bottom: 15px;
   line-height: 1.7;
   color: var(--c-text-muted);
+  font-size: 1.05rem;
 }
 
 .about-me strong {
@@ -707,13 +805,13 @@ main {
 
 /* --- Project Card Background Images --- */
 .project-logvigil {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.95)), url('L0gVigil.svg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.95)), url('L0gVigil.svg');
   background-size: cover;
   background-position: center;
 }
 
 .project-logvigil:hover {
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.85)), url('L0gVigil.svg');
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85)), url('L0gVigil.svg');
 }
 
 .project-router {
@@ -823,7 +921,7 @@ main {
 }
 
 /* --- Cyber Background (Canvas) --- */
-#cyber-canvas {
+/* #cyber-canvas { /* Commented out as per request */
   position: fixed;
   top: 0;
   left: 0;
@@ -831,7 +929,7 @@ main {
   height: 100%;
   z-index: -1;
 }
-
+*/
 /* --- Custom Cursor --- */
 .cursor-dot,
 .cursor-outline {
@@ -894,13 +992,18 @@ body:hover .cursor-outline.hovered {
   position: relative;
   margin: auto;
   width: 90%;
-  max-width: 600px;
-  background: #0f0f0f;
-  border: 1px solid var(--c-card-border);
+  max-width: 700px; /* Slightly wider for terminal */
+  background: var(--c-bg); /* Use terminal background */
+  border: 1px solid var(--c-primary); /* Terminal border */
   border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.8);
+  padding: 0; /* Terminal header/body handle padding */
+  box-shadow: 0 0 25px rgba(0, 255, 140, 0.2); /* Terminal glow */
   animation: zoomIn 0.3s ease-out;
+  display: flex; /* For header and body layout */
+  flex-direction: column;
+}
+.modal-content .terminal-body {
+  padding-top: 20px; /* Adjust padding for the body inside modal */
 }
 
 @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -914,17 +1017,53 @@ body:hover .cursor-outline.hovered {
   background: transparent;
   border: none;
   cursor: pointer;
+  z-index: 10; /* Ensure it's above terminal header */
 }
 .close-button:hover { color: var(--c-secondary); }
 
 /* --- Footer --- */
 .site-footer {
   background: transparent;
-  padding: 25px 15px;
+  padding: 35px 15px; /* Increased padding */
   color: var(--c-text-muted);
   text-align: center;
   font-size: 14px;
   border-top: 1px solid var(--c-card-border);
+}
+
+/* Contact Form Terminal Styling */
+#contact.contact {
+  padding: 0; /* Remove default padding from section */
+  margin: 0; /* Remove default margin from section */
+}
+
+#contact-form {
+  gap: 15px; /* Adjust gap between form groups */
+}
+
+#contact-form .form-group {
+  display: flex;
+  align-items: flex-start; /* Align prompt with input */
+}
+
+#contact-form .form-group input,
+#contact-form .form-group textarea {
+  flex-grow: 1; /* Take remaining space */
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  border-bottom: 1px dashed rgba(0, 255, 140, 0.5); /* Dashed neon green underline */
+  border-radius: 0; /* No border radius */
+  padding: 5px 0; /* Adjust padding */
+  color: var(--c-text-main);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+}
+
+#contact-form .form-group input:focus,
+#contact-form .form-group textarea:focus {
+  border-color: var(--c-secondary); /* Neon blue on focus */
+  box-shadow: none; /* Remove box shadow */
+  outline: none;
 }
 
 .site-footer .social-links {
@@ -1030,7 +1169,7 @@ body:hover .cursor-outline.hovered {
 
   .nav-item {
     padding: 16px 0;
-    border-bottom: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-card-border);
   }
 
   .nav-menu.active {
@@ -1090,4 +1229,8 @@ body:hover .cursor-outline.hovered {
   }
   .intro-text .subtitle {
     font-size: 1.1em;
+  }
+  .modal-content {
+    max-width: 95%; /* Adjust modal width for small screens */
+    border-radius: 10px; /* Smaller border radius for mobile */
   }

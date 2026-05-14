@@ -17,25 +17,25 @@
   <rect width="100%" height="100%" fill="url(#bg-grad)"/>
 
   <!-- Grid Lines -->
-  <g stroke="#00f2ea" stroke-width="0.5" opacity="0.1">
+  <g stroke="#a855f7" stroke-width="0.5" opacity="0.1">
     <path d="M0 40 H854 M0 80 H854 M0 120 H854 M0 160 H854" />
     <path d="M100 0 V200 M200 0 V200 M300 0 V200 M400 0 V200 M500 0 V200 M600 0 V200 M700 0 V200 M800 0 V200" />
   </g>
 
   <!-- Animated Scanning Line -->
-  <rect x="0" y="0" width="2" height="200" fill="#00f2ea" opacity="0.6" filter="url(#glow)">
+  <rect x="0" y="0" width="2" height="200" fill="#a855f7" opacity="0.6" filter="url(#glow)">
     <animate attributeName="x" from="0" to="854" dur="4s" repeatCount="indefinite" />
   </rect>
 
   <!-- Shield Icon Group -->
   <g transform="translate(427, 85)" filter="url(#glow)">
     <!-- Outer Shield -->
-    <path d="M0 -45 L40 -30 V10 Q0 55 -40 10 V-30 Z" fill="none" stroke="#00f2ea" stroke-width="3">
+    <path d="M0 -45 L40 -30 V10 Q0 55 -40 10 V-30 Z" fill="none" stroke="#a855f7" stroke-width="3">
       <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
       <animate attributeName="stroke-width" values="2;4;2" dur="2s" repeatCount="indefinite" />
     </path>
     <!-- Inner Detail -->
-    <path d="M0 -30 V20 M-20 -5 H20" stroke="#00f2ea" stroke-width="2" opacity="0.8">
+    <path d="M0 -30 V20 M-20 -5 H20" stroke="#3b82f6" stroke-width="2" opacity="0.8">
       <animate attributeName="opacity" values="0.3;0.9;0.3" dur="1.5s" repeatCount="indefinite" />
     </path>
   </g>
@@ -47,9 +47,9 @@
   </text>
 
   <!-- Status Indicators -->
-  <circle cx="380" cy="160" r="3" fill="#00f2ea">
+  <circle cx="380" cy="160" r="3" fill="#3b82f6">
     <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" />
   </circle>
-  <text x="405" y="163" font-family="monospace" font-size="10" fill="#00f2ea" opacity="0.8">SYSTEM PROTECTED</text>
+  <text x="405" y="163" font-family="monospace" font-size="10" fill="#3b82f6" opacity="0.8">SYSTEM PROTECTED</text>
 
 </svg>
