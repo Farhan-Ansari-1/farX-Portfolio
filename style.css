@@ -427,6 +427,8 @@ main {
   position: relative;
   overflow: hidden;
   border-radius: 15px;
+  flex: 1;
+  min-width: 280px;
 }
 
 .about-image {
